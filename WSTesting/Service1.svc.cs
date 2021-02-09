@@ -23,13 +23,13 @@ namespace WSTesting
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                     connection.Open();
-                    SqlCommand command = new SqlCommand("SELECT @@Version AS Version;", connection);
+                    SqlCommand command = new SqlCommand("exec ws_consultaPersona " + value.ToString() , connection);
                     SqlDataReader reader = command.ExecuteReader();
                     if (reader.HasRows)
                     {
                         while (reader.Read())
                         {
-                            return string.Format("Estado de la conexion: {0}", reader.GetString(0) );
+                            return string.Format("Persona: {0}", reader.GetString(0) );
                         }
                     }
                     reader.Close();
